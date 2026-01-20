@@ -1,32 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CTAButton from './CTAButton';
 import Testimonials from './Testimonials';
 import FAQ from './FAQ';
-import OrderPopup from './OrderPopup';
 import { Check, ShieldCheck } from 'lucide-react';
 
 interface SalesPageProps {
   price?: string;
+  onStartCheckout: () => void;
 }
 
-const SalesPage: React.FC<SalesPageProps> = ({ price = "11,11" }) => {
-  const [showPopup, setShowPopup] = useState(false);
-
+const SalesPage: React.FC<SalesPageProps> = ({ price = "11,11", onStartCheckout }) => {
+  
   const handleCTAClick = () => {
-    setShowPopup(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onStartCheckout();
   };
 
-  // Se o popup estiver ativo, renderiza APENAS o popup (substituindo a página)
-  if (showPopup) {
-    return (
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white min-h-[60vh] flex flex-col justify-center">
-        <OrderPopup onClose={() => setShowPopup(false)} />
-      </div>
-    );
-  }
-
-  // Caso contrário, renderiza a carta de vendas normal
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white">
       
