@@ -14,14 +14,22 @@ const SalesPage: React.FC<SalesPageProps> = ({ price = "11,11" }) => {
 
   const handleCTAClick = () => {
     setShowPopup(true);
-    // window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll not needed with fixed modal
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Se o popup estiver ativo, renderiza APENAS o popup (substituindo a página)
+  if (showPopup) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white min-h-[60vh] flex flex-col justify-center">
+        <OrderPopup onClose={() => setShowPopup(false)} />
+      </div>
+    );
+  }
+
+  // Caso contrário, renderiza a carta de vendas normal
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8 md:py-12 bg-white">
       
-      {showPopup && <OrderPopup onClose={() => setShowPopup(false)} />}
-
       {/* Header / Intro */}
       <div className="text-center mb-8">
         <h3 className="text-pink-600 font-bold uppercase tracking-widest text-sm mb-2">Último deseo de Lady Soraya</h3>
